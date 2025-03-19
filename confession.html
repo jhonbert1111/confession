@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Love Letter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        .message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #b22222;
+            margin-bottom: 15px;
+        }
+
+        .heart {
+            font-size: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .heart:hover {
+            transform: scale(1.1);
+        }
+
+        .letter-container {
+            display: none;
+            opacity: 0;
+            max-width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container">
+        <div class="message">Click the heart!</div>
+        <div class="heart" onclick="showLetter()">❤️</div>
+    </div>
+
+    <div class="letter-container" id="letter">
+        <h2>Dear Crush,</h2>
+        <p>I've been keeping this in for a while, but I think Valentine's Day is the perfect time to say it—you’re the reason my days feel brighter. Every little moment with you means more than I can put into words.</p>
+        <p>So, here it is... I like you, a lot. Maybe even love. Would you be my Valentine? No matter your answer, I just wanted you to know how special you are to me.</p>
+        <p>With love, <br> Your Admirer ❤️</p>
+    </div>
+
+    <script>
+        function showLetter() {
+            document.querySelector('.heart-container').style.display = 'none';
+            let letter = document.getElementById('letter');
+            letter.style.display = 'block';
+            setTimeout(() => { letter.style.opacity = '1'; }, 50);
+        }
+    </script>
+</body>
+</html>
