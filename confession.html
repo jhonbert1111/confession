@@ -5,80 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Love Letter</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
         body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffcccc, #ffe6e6);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #ffe6e6;
-            text-align: center;
-            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
             flex-direction: column;
         }
-
+        
         .message {
             font-family: 'Dancing Script', cursive;
-            font-size: 24px;
+            font-size: 30px;
+            font-weight: bold;
             color: #b22222;
             margin-bottom: 15px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .container {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .envelope {
+            width: 850px;
+            height: 450px;
+            background: linear-gradient(to top, #d32f2f, #e57373);
+            position: relative;
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, #ff4d4d, #d32f2f);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transition: transform 0.5s ease-in-out;
+            transform-origin: top;
+        }
+
+        .letter {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 80%;
+            height: 85%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+        }
+
+        .letter h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .letter p {
+            font-size: 20px;
+            line-height: 1.8;
         }
 
         .heart {
-            font-size: 50px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
+            font-size: 36px;
+            color: red;
         }
 
-        .heart:hover {
-            transform: scale(1.1);
+        /* Open state */
+        .open .flap {
+            transform: rotateX(180deg);
         }
 
-        .letter-container {
-            display: none;
-            opacity: 0;
-            max-width: 400px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.5s ease-in-out forwards;
+        .open .letter {
+            top: 10%;
+            opacity: 1;
         }
 
-        .heart-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
+        /* Heartbeat animation */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="heart-container">
-        <div class="message">Click the heart!</div>
-        <div class="heart" onclick="showLetter()">❤️</div>
-    </div>
 
-    <div class="letter-container" id="letter">
-        <h2>Dear Crush,</h2>
-        <p>I've been keeping this in for a while, but I think Valentine's Day is the perfect time to say it—you’re the reason my days feel brighter. Every little moment with you means more than I can put into words.</p>
-        <p>So, here it is... I like you, a lot. Maybe even love. Would you be my Valentine? No matter your answer, I just wanted you to know how special you are to me.</p>
-        <p>With love, <br> Your Admirer ❤️</p>
+    <!-- Message Above the Envelope -->
+    <div class="message">Open the envelope, cry baby hehe💌</div>
+
+    <div class="container" onclick="openEnvelope()">
+        <div class="envelope">
+            <div class="flap"></div>
+            <div class="letter">
+                <h2>My Dearest Sere,</h2>
+                <p>I've been meaning to say this i know it's too early for me to confess, but since the day that i got very comfortable with you i liked you as much na and 
+                    i can't express my feelings towards you when were talking and when you are laughing it made me smile and you made my day. i like every inch of you and i can't 
+                    resist when talking to you. i get very hyper when were talking kasi everytime that im down or wala sa mood you are there to cheer me up.</p>
+                <p>You're amazing in every way, and I just want you to know how much you mean to me.</p>
+                <p class="heart">thank you for talking to me and making me comfortable with you my lia!!!❤️</p>
+
+                <!-- Spotify Song Embed -->
+                <iframe style="border-radius:12px" src="https://open.spotify.com/track/6GPfKhdih8hhpC0MJXDu6G?si=e1b40d9056914647" 
+                        width="300" height="80" frameborder="0" allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
+        </div>
     </div>
 
     <script>
-        function showLetter() {
-            document.querySelector('.heart-container').style.display = 'none';
-            let letter = document.getElementById('letter');
-            letter.style.display = 'block';
-            setTimeout(() => { letter.style.opacity = '1'; }, 50);
+        function openEnvelope() {
+            let container = document.querySelector(".container");
+            container.classList.toggle("open");
         }
     </script>
+
 </body>
 </html>
